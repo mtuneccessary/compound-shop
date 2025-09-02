@@ -1,68 +1,118 @@
-# Compound Demo (CLI)
+# Compound Connect Tools
 
-This project demonstrates basic interactions with the Compound v3 (Comet) protocol using the Compound-js library and Ethers.js. It runs on a local Hardhat fork of the Ethereum mainnet.
+A community-driven, plugin-friendly CLI and documentation hub for building with Compound v3 (Comet). This repository provides runnable tools, clear tutorials, and a contribution workflow designed to make it easy for developers to learn, build, and collaborate.
 
-## Description
+## Highlights
+- Extensible CLI with pluggable tools
+- Works on a local Hardhat mainnet fork
+- Strict TypeScript, ESLint, Prettier, and CI
+- Contributor-friendly: issue/PR templates, labels, CODEOWNERS
 
-The CLI provides pluggable tools. Included tools:
-- `comet-demo`: supplies WBTC, borrows USDC, repays USDC
-- `markets`: prints current supply/borrow rates and utilization
-- `fund-and-approve`: impersonates a whale to fund an address with WBTC/USDC and approves Comet
+## Quick Start
 
-It uses mainnet contract addresses and a default Hardhat private key for demonstration purposes.
+### Prerequisites
+- Node.js 16+
+- An Infura API key (for Hardhat mainnet forking)
 
-## Prerequisites
+### Install
+```
+npm install
+```
 
-- Node.js (v16 or later)
-- An Infura API key (for mainnet forking)
+### Environment
+Create a `.env` at the repo root with:
+```
+INFURA_URL=https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY
+```
 
-## Installation
+See `docs/ENVIRONMENT.md` for details.
 
-1. Clone the repository.
-2. Install dependencies:
-   ```
-   npm install
-   ```
-3. Create a `.env` file in the root directory and add your Infura URL:
-   ```
-   INFURA_URL=https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY
-   ```
+### Run a local fork
+```
+npm run fork
+```
 
-## Usage
+### Use the CLI (in a second terminal)
+```
+# Read-only market metrics
+npm run cli -- markets
 
-1. Start the Hardhat node with mainnet forking:
-   ```
-   npm run fork
-   ```
+# Fund and approve tokens on the fork (example; requires a whale address)
+npm run cli -- fund-and-approve --token USDC --from 0x... --amount 100
 
-2. In a separate terminal, run the CLI:
-   ```
-   npm run demo
-   ```
-   Or directly:
-   ```
-   npm run cli -- markets
-   npm run cli -- fund-and-approve --token USDC --from <whale> --amount 100
-   npm run cli -- comet-demo
-   ```
+# Full demo (supply WBTC -> borrow USDC -> repay USDC)
+npm run cli -- comet-demo
+```
 
-The tools log relevant information and transaction hashes.
+Notes:
+- The CLI defaults to `http://127.0.0.1:8545`. Ensure the fork is running first.
+- Hardhat accounts start with ETH only; use `fund-and-approve` for WBTC/USDC and approvals as needed.
+- This is a demo. Do not use default keys in production.
 
-## Notes
+## CLI Commands
+- `markets`: Prints current supply/borrow rates and utilization for Comet USDC
+- `fund-and-approve`: Impersonates a whale on the fork, transfers WBTC/USDC, and approves Comet
+- `comet-demo`: Supplies WBTC, borrows USDC, and repays a portion
 
-- This is a demo and uses a default private key. Do not use in production.
-- Ensure the Hardhat node is running before executing the CLI.
-- The script assumes the local node is at `http://127.0.0.1:8545`.
-- On a fork, Hardhat accounts have ETH only, not WBTC/USDC. Use `fund-and-approve` to bootstrap balances and approvals as needed.
+See `docs/COOKBOOK.md` for more examples and flags.
 
 ## Project Structure
+```
+.
+├─ src/
+│  ├─ cli.ts               # Commander-based CLI entrypoint
+│  ├─ lib/
+│  │  ├─ provider.ts       # Provider & wallet helpers
+│  │  ├─ compound.ts       # Compound client wrapper
+│  │  └─ erc20.ts          # Minimal ERC-20 ABI
+│  └─ tools/
+│     ├─ markets.ts        # Read-only market info
+│     ├─ fund-and-approve.ts # Impersonate whale, transfer, approve
+│     └─ comet-demo.ts     # Supply/borrow/repay demo
+├─ docs/
+│  ├─ ARCHITECTURE.md
+│  ├─ ENVIRONMENT.md
+│  ├─ HOW_TO_ADD_A_TOOL.md
+│  ├─ COOKBOOK.md
+│  └─ RELEASE.md
+├─ examples/               # Community examples & hackathon submissions
+├─ .github/
+│  ├─ ISSUE_TEMPLATE/
+│  ├─ workflows/           # CI, label sync, issue seed
+│  └─ CODEOWNERS
+├─ hardhat.config.ts       # Forking config (uses INFURA_URL)
+├─ tsconfig.json           # rootDir/outDir -> dist
+├─ package.json            # scripts, bin, lint/format/typecheck/build
+└─ CHANGELOG.md
+```
 
-- `src/cli.ts`: CLI entrypoint (commander)
-- `src/tools/*.ts`: Tools (e.g., `comet-demo`, `markets`, `fund-and-approve`)
-- `src/lib/*.ts`: Helpers (provider, Compound, ERC20 ABI, etc.)
-- `hardhat.config.ts`: Hardhat forking config
-- `docs/*`: Architecture and contributor guides
+## Development
+- Lint: `npm run lint`
+- Typecheck: `npm run typecheck`
+- Build to `dist/`: `npm run build`
+- Smoke test (CI/dev): `npm run smoke`
 
-## Contributing
+The CLI binary is exposed as `compound-tools` after build (points to `dist/cli.js`).
 
-See `CONTRIBUTING.md` for guidelines on adding new tools.
+## How to Contribute
+We welcome tools, docs, and examples.
+
+- Read the guidelines: `CONTRIBUTING.md`
+- Add a tool: see `docs/HOW_TO_ADD_A_TOOL.md`
+- Use labels to find issues: `good first issue`, `help wanted`, `tool`, `docs`, `tutorial`, `ci`, `hackathon`
+- Open a PR and ensure CI passes (lint, typecheck, build, smoke)
+
+## Documentation
+- Architecture: `docs/ARCHITECTURE.md`
+- Environment: `docs/ENVIRONMENT.md`
+- Cookbook: `docs/COOKBOOK.md`
+- Release process: `docs/RELEASE.md`
+
+## Governance & Security
+- Code of Conduct: `CODE_OF_CONDUCT.md`
+- Security Policy: `SECURITY.md`
+- CODEOWNERS: `.github/CODEOWNERS`
+- License: `LICENSE` (MIT)
+
+## Acknowledgements
+This repository is part of a broader effort to help developers build with Compound via tutorials, tools, and community collaboration.
