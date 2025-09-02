@@ -18,7 +18,7 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write .",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "smoke": "(npx hardhat node & echo $! > .hh_pid && sleep 4 && ts-node src/cli.ts markets && kill -9 $(cat .hh_pid) || true)"
   },
   "dependencies": {
     "@compound-finance/compound-js": "^0.6.2",

@@ -1,0 +1,46 @@
+issues:
+  - title: Add positions tool to display collateral/borrow balances
+    labels: [tool, good first issue]
+    body: |
+      Add a read-only `positions` command that prints per-asset balances and debt for an address.
+      - Accept `--address` and `--rpc`
+      - Output JSON with balances
+      - Document usage in README
+  - title: Enhance markets output with asset symbols and base info
+    labels: [enhancement, tool]
+    body: |
+      Extend `markets` to print asset symbols, base asset, and collateral list.
+      - Keep current rates
+      - Add symbols and base token
+  - title: Docs tutorial: fork + approvals quickstart
+    labels: [docs, tutorial]
+    body: |
+      Write a quickstart tutorial covering starting a fork and approving tokens.
+      - Include `fund-and-approve` usage
+      - Link from README
+  - title: Add token-allowance command
+    labels: [tool]
+    body: |
+      Implement a `token-allowance` tool to check and optionally set allowance.
+      - Accept owner/spender/token
+      - Optional `--set <amount>`
+  - title: Improve comet-demo with preflight checks
+    labels: [enhancement]
+    body: |
+      Add balance and allowance checks with helpful guidance before sending txs.
+  - title: Add health command to estimate simple risk metric
+    labels: [tool]
+    body: |
+      Create a `health` tool that computes a basic risk/utilization metric per account.
+  - title: CI matrix for Node 18/20 and npm cache
+    labels: [ci]
+    body: |
+      Update CI to run on Node 18 and 20 and enable npm cache.
+  - title: Add CLI cookbook with 6 runnable recipes
+    labels: [docs]
+    body: |
+      Write `docs/COOKBOOK.md` with at least six concrete command examples.
+  - title: Add tokens inspector tool (symbol/decimals)
+    labels: [tool]
+    body: |
+      Implement `tokens` tool to print ERC-20 symbol and decimals for an address. 
