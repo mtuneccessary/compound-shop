@@ -1,5 +1,8 @@
 # Compound Connect Tools
 
+[![CI](https://github.com/mtuneccessary/compund-shop/actions/workflows/ci.yml/badge.svg)](https://github.com/mtuneccessary/compund-shop/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+
 A community-driven, plugin-friendly CLI and documentation hub for building with Compound v3 (Comet). This repository provides runnable tools, clear tutorials, and a contribution workflow designed to make it easy for developers to learn, build, and collaborate.
 
 ## Highlights
@@ -7,6 +10,13 @@ A community-driven, plugin-friendly CLI and documentation hub for building with 
 - Works on a local Hardhat mainnet fork
 - Strict TypeScript, ESLint, Prettier, and CI
 - Contributor-friendly: issue/PR templates, labels, CODEOWNERS
+
+## Quick Links
+- Architecture: `docs/ARCHITECTURE.md`
+- Beginner Tutorial: `docs/TUTORIAL_BEGINNER.md`
+- Environment: `docs/ENVIRONMENT.md`
+- Cookbook: `docs/COOKBOOK.md`
+- How to Add a Tool: `docs/HOW_TO_ADD_A_TOOL.md`
 
 ## Quick Start
 

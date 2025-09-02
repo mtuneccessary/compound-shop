@@ -18,7 +18,8 @@
     "typecheck": "tsc -p tsconfig.json --noEmit",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write .",
-    "smoke": "(npx hardhat node & echo $! > .hh_pid && sleep 4 && ts-node src/cli.ts markets && kill -9 $(cat .hh_pid) || true)"
+    "smoke": "(npx hardhat node >/dev/null 2>&1 & echo $! > .hh_pid && sleep 6 && ts-node src/cli.ts markets; code=$?; kill -9 $(cat .hh_pid) >/dev/null 2>&1 || true; exit $code)",
+    "test": "npm run smoke"
   },
   "dependencies": {
     "@compound-finance/compound-js": "^0.6.2",
