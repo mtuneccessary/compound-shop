@@ -1,16 +1,15 @@
-# Compound Demo
+# Compound Demo (CLI)
 
 This project demonstrates basic interactions with the Compound v3 (Comet) protocol using the Compound-js library and Ethers.js. It runs on a local Hardhat fork of the Ethereum mainnet.
 
 ## Description
 
-The script in `index.ts` performs the following actions:
-- Connects to a local Hardhat node.
-- Supplies WBTC as collateral.
-- Borrows USDC.
-- Repays a portion of the borrowed USDC.
+The CLI provides pluggable tools. Included tools:
+- `comet-demo`: supplies WBTC, borrows USDC, repays USDC
+- `markets`: prints current supply/borrow rates and utilization
+- `fund-and-approve`: impersonates a whale to fund an address with WBTC/USDC and approves Comet
 
-It uses hardcoded mainnet contract addresses and a default Hardhat private key for demonstration purposes.
+It uses mainnet contract addresses and a default Hardhat private key for demonstration purposes.
 
 ## Prerequisites
 
@@ -20,40 +19,50 @@ It uses hardcoded mainnet contract addresses and a default Hardhat private key f
 ## Installation
 
 1. Clone the repository.
-2. Install dependencies:  
+2. Install dependencies:
    ```
    npm install
    ```
-3. Create a `.env` file in the root directory and add your Infura URL:  
+3. Create a `.env` file in the root directory and add your Infura URL:
    ```
    INFURA_URL=https://mainnet.infura.io/v3/YOUR_INFURA_API_KEY
    ```
 
 ## Usage
 
-1. Start the Hardhat node with mainnet forking:  
+1. Start the Hardhat node with mainnet forking:
    ```
    npm run fork
    ```
 
-2. In a separate terminal, run the demo script:  
+2. In a separate terminal, run the CLI:
    ```
-   npm run start
+   npm run demo
+   ```
+   Or directly:
+   ```
+   npm run cli -- markets
+   npm run cli -- fund-and-approve --token USDC --from <whale> --amount 100
+   npm run cli -- comet-demo
    ```
 
-The script will log the transaction hashes for supply, borrow, and repay operations, as well as current market rates.
+The tools log relevant information and transaction hashes.
 
 ## Notes
 
 - This is a demo and uses a default private key. Do not use in production.
-- Ensure the Hardhat node is running before executing the script.
+- Ensure the Hardhat node is running before executing the CLI.
 - The script assumes the local node is at `http://127.0.0.1:8545`.
+- On a fork, Hardhat accounts have ETH only, not WBTC/USDC. Use `fund-and-approve` to bootstrap balances and approvals as needed.
 
-## Dependencies
+## Project Structure
 
-- @compound-finance/compound-js
-- ethers
-- dotenv
+- `src/cli.ts`: CLI entrypoint (commander)
+- `src/tools/*.ts`: Tools (e.g., `comet-demo`, `markets`, `fund-and-approve`)
+- `src/lib/*.ts`: Helpers (provider, Compound, ERC20 ABI, etc.)
+- `hardhat.config.ts`: Hardhat forking config
+- `docs/*`: Architecture and contributor guides
 
-For more details, see `package.json`.
-# compund-shop
+## Contributing
+
+See `CONTRIBUTING.md` for guidelines on adding new tools.
