@@ -13,6 +13,12 @@ Compound Connect set out to lower the barrier to building with Compound by deliv
 
 The initiative successfully onboarded new builders, grew engagement across regions, and left behind a durable repository for continued community contributions.
 
+## Milestones (Deep References)
+- Milestone 1 — Comprehensive Developer Documentation: [Deep Reference](INSERT_LINK_M1)
+- Milestone 2 — Online Workshops: [Deep Reference](INSERT_LINK_M2)
+- Milestone 3 — Global Hackathon: [Deep Reference](INSERT_LINK_M3)
+- Milestone 4 — Open‑Source Repository and Maintenance: [Deep Reference](INSERT_LINK_M4)
+
 ## Objectives and Deliverables
 - Beginner documentation and tutorials: Delivered
 - Workshops (hands‑on coding, Q&A): Delivered
@@ -103,6 +109,7 @@ The budget supported documentation, developer time for examples/tools, workshop 
 - Docs: see `docs/`
 - Examples: see `examples/`
 - CI: `.github/workflows/ci.yml`
+- Milestones Deep References: see the "Milestones (Deep References)" section above
 
 ## Appendix: Deliverables Checklist
 - [x] Comprehensive developer documentation (tutorial-driven)
